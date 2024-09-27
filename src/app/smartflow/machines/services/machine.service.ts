@@ -15,4 +15,8 @@ export class MachineService {
   getMachinesByCompany(companyId: number): Observable<Machine[]> {
     return this.http.get<Machine[]>(`${this.apiUrl}?id_company=${companyId}`);
   }
+
+  getAll(): Observable<Machine[]> {
+    return this.http.get<Machine[]>(this.apiUrl);
+  }
 }
