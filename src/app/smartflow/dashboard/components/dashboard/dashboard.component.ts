@@ -62,5 +62,18 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  selectCompany(event: MatSelectChange): void {
+    const companyId = event.value;
+    this.selectedCompany = this.companies.find(company => company.id_company === companyId) || null;
+    if (this.selectedCompany) {
+      // Al cambiar la compañía, se resetea el trabajador seleccionado
+      this.selectedWorker = null;
+      this.loadWorkers(this.selectedCompany.id_company);
+    }
+  }
 
+  selectWorker(event: MatSelectChange): void {
+    const workerId = event.value;
+    this.selectedWorker = this.workers.find(worker => worker.id === workerId) || null;
+  }
 }
