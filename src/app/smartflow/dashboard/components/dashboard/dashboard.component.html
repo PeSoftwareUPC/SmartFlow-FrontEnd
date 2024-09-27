@@ -73,6 +73,31 @@
                 </div>
               </div>
 
+              <div *ngIf="selectedCompany" class="worker-selection">
+                <label for="worker-select">Select Worker:</label>
+                <mat-form-field appearance="fill">
+                  <mat-label>Worker</mat-label>
+                  <mat-select id="worker-select" (selectionChange)="selectWorker($event)">
+                    <mat-option *ngFor="let worker of workers" [value]="worker.id">
+                      {{ worker.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div *ngIf="selectedWorker" class="worker-details">
+                <h3>{{ selectedWorker.name }}</h3>
+                <p><strong>Consumption:</strong> {{ selectedWorker.consumption }}</p>
+                <p><strong>Cost:</strong> {{ selectedWorker.cost }}</p>
+              </div>
+
+              <div *ngIf="loading" class="loading">
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+              </div>
+
+              <div *ngIf="error" class="error">
+                <p>{{ error }}</p>
+
                 </div>
           </div>
         </div>
