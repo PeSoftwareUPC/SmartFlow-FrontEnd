@@ -48,4 +48,19 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  loadWorkers(companyId: number): void {
+    this.loading = true; // Añadimos un indicador de carga
+    this.workerService.getWorkersByCompany(companyId).subscribe({
+      next: (data) => {
+        this.workers = data;
+        this.selectedWorker = null; // Reiniciamos el trabajador seleccionado
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err;
+        this.loading = false;
+      }
+    });
+  }
+
 }
