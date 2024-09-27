@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from '../../models/company.entity';
-import { Worker } from '../../models/worker.entity';
 import { CompanyService } from '../../services/company.service';
 import { WorkerService } from '../../services/worker.service';
+import { Company } from '../../models/company.entity';
+import { Worker } from '../../models/worker.entity';
+import { MatSelectChange } from '@angular/material/select';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   sidebarOpen = false;
@@ -14,6 +16,7 @@ export class DashboardComponent implements OnInit {
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
+
   companies: Company[] = [];
   workers: Worker[] = [];
   selectedCompany: Company | null = null;
@@ -48,6 +51,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
   loadWorkers(companyId: number): void {
     this.loading = true; // Añadimos un indicador de carga
     this.workerService.getWorkersByCompany(companyId).subscribe({
@@ -62,6 +66,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
   selectCompany(event: MatSelectChange): void {
     const companyId = event.value;
     this.selectedCompany = this.companies.find(company => company.id_company === companyId) || null;
@@ -77,3 +82,5 @@ export class DashboardComponent implements OnInit {
     this.selectedWorker = this.workers.find(worker => worker.id === workerId) || null;
   }
 }
+
+
