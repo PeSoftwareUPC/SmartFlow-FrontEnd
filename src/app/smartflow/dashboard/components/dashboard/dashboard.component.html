@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<app-toolbar (toggleSidebar)="toggleSidebar()"></app-toolbar>
+<div class="main-layout">
+  <app-side-navigation-bar *ngIf="sidebarOpen" class="sidebar"></app-side-navigation-bar>
+  <div class="content">
+    <router-outlet></router-outlet>
+    <div class="flex-col min-h-screen">
+      <main class="flex-1 p-4 lg:p-6">
+        <div class="tabs space-y-4">
+          <div id="overview" class="tab-content active space-y-4">
+            <div class="dashboard-container">
+              <div class="company-selection">
+                <label for="company-select">Select Company:</label>
+                <mat-form-field appearance="fill">
+                  <mat-label>Company</mat-label>
+                  <mat-select id="company-select" (selectionChange)="selectCompany($event)">
+                    <mat-option *ngFor="let company of companies" [value]="company.id_company">
+                      {{ company.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+
