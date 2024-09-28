@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Worker } from '../models/worker.entity';
+import { Company } from '../models/company.entity';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkerService {
-  private apiUrl = `${environment.apiUrl}/workers`;
+export class CompanyService {
+  private apiUrl = `${environment.apiUrl}/company`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getWorkersByCompany(id_company: number): Observable<Worker[]> {
-    return this.http.get<Worker[]>(`${this.apiUrl}?id_company=${id_company}`);
-
+  getAllCompanies(): Observable<Company[]> {
+    return this.http.get<Company[]>(this.apiUrl);
   }
 
-  getWorkerById(id_worker: number): Observable<Worker> {
-    return this.http.get<Worker>(`${this.apiUrl}/${id_worker}`);
+  getCompanyData(companyId: number): Observable<Company> {
+    return this.http.get<Company>(`${this.apiUrl}/${companyId}`);
+  }
+
+  getEmployeeConsumption(companyId: number, workerId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${companyId}/worker/${workerId}/consumption`);
   }
 }
