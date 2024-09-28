@@ -1,4 +1,4 @@
-export class CompanyEntity {
+export class Company {
   id_company: number;
   name: string;
   email: string;
