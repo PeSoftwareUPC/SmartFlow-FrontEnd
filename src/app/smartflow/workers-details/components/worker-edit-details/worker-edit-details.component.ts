@@ -9,6 +9,12 @@ import { WorkerService } from '../../../dashboard/services/worker.service';
   styleUrls: ['./worker-edit-details.component.css']
 })
 export class WorkerEditDetailsComponent implements OnInit {
+  sidebarOpen = false;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
   @Input() worker!: Worker;
 
   constructor(
